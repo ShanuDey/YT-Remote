@@ -3,11 +3,11 @@ import path from 'path';
 
 export default class VideoPlayer {
   async playVideo(url) {
-    const extensionPath = path.join(__dirname, 'extension', 'uBlock');
-    console.log(ext);
+    const dataDir = path.resolve('dataDir');
+    const extensionPath = path.resolve('extension', 'uBlock');
     const browser = await puppeteer.launch({
       headless: false,
-      executablePath: '/usr/bin/chromium-browser',
+      userDataDir: dataDir,
       args: [
         `--disable-extensions-except=${extensionPath}`,
         `--load-extension=${extensionPath}`,
