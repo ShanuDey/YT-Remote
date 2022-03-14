@@ -20,4 +20,8 @@ app.post('/start_video', urlencodedParser, function (req, res) {
   res.redirect('/');
 });
 
-app.listen(4444);
+const PORT = process.env.PORT || 80;
+app.listen(PORT, function (err) {
+  if (err) console.log(err);
+  console.log('Server listening on PORT', PORT);
+});
