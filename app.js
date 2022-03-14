@@ -14,15 +14,13 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/' + 'index.html');
 });
 
-app.post('/start_video', urlencodedParser, function (req, res) {
+app.post('/start_video', urlencodedParser, async (req, res) => {
   const video_url = req.body.video_url;
-  // console.log(video_url);
-  videoPlayer.playVideo(video_url);
+  await videoPlayer.playVideo(video_url);
 });
 
-app.get('/close', function (req, res) {
-  console.log('close');
-  videoPlayer.closePlayer();
+app.get('/close_video', async (req, res) => {
+  await videoPlayer.closeVideo();
   res.redirect('/');
 });
 

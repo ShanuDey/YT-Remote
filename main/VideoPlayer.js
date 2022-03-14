@@ -2,10 +2,12 @@ import puppeteer from 'puppeteer';
 import path from 'path';
 
 export default class VideoPlayer {
-  constructor(browser) {
-    this.browser = browser;
+  constructor() {
+    this.browser = null;
+    this.page = null;
   }
-  async playVideo(url) {
+
+  async openPlayer() {
     const dataDir = path.resolve('dataDir');
     const extensionPath = path.resolve('extension', 'uBlock');
     this.browser = await puppeteer.launch({
@@ -21,25 +23,29 @@ export default class VideoPlayer {
         '--enable-blink-features=IdleDetection',
       ],
     });
+    const [page] = await this.browser.pages();
+    this.page = page;
+    this.page.setDefaultNavigationTimeout(0);
+  }
 
+  async playVideo(url) {
     try {
-      const [page] = await this.browser.pages();
-      page.setDefaultNavigationTimeout(0);
-      await page.goto(url);
-      await page.waitForSelector('.ytp-fullscreen-button.ytp-button');
-      await page.evaluate(() => {
+      if (typeof this.page === 'undefined' || this.page === null) {
+        await this.openPlayer();
+      }
+      await this.page.goto(url);
+      await this.page.waitForSelector('.ytp-fullscreen-button.ytp-button');
+      await this.page.evaluate(() => {
         document.querySelector('.ytp-fullscreen-button.ytp-button').click();
       });
-
-      // close video player after video ends
-      //await page.waitForFunction(
-      // "document.querySelector('.ytp-time-current').innerHTML === document.querySelector('.ytp-time-duration').innerHTML"
-      //);
     } catch (err) {
       console.error(err);
     }
   }
-  async closePlayer() {
-    await this.browser.close();
+
+  async closeVideo() {
+    if (this.page) await this.browser.close();
+    this.page = null;
+    this.browser = null;
   }
 }
