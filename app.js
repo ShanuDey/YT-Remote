@@ -17,6 +17,7 @@ app.get('/', function (req, res) {
 app.post('/start_video', urlencodedParser, async (req, res) => {
   const video_url = req.body.video_url;
   await videoPlayer.playVideo(video_url);
+  res.redirect('/');
 });
 
 app.get('/close_video', async (req, res) => {
