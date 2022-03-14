@@ -1,0 +1,16 @@
+{
+  "name": "yt-automation",
+  "version": "1.0.0",
+  "description": "A Youtube automation software to remote play videos",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "ShanuDey",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^13.5.1"
+  }
+}
