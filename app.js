@@ -21,6 +21,11 @@ app.post('/start_video', urlencodedParser, function (req, res) {
   res.redirect('/');
 });
 
+app.get('/close', function (req, res) {
+  console.log('close');
+  res.send('close');
+});
+
 const PORT = process.env.PORT || 80;
 app.listen(PORT, function (err) {
   if (err) console.log(err);
