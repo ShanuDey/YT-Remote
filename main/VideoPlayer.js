@@ -2,10 +2,13 @@ import puppeteer from 'puppeteer';
 import path from 'path';
 
 export default class VideoPlayer {
+  constructor(browser) {
+    this.browser = browser;
+  }
   async playVideo(url) {
     const dataDir = path.resolve('dataDir');
     const extensionPath = path.resolve('extension', 'uBlock');
-    const browser = await puppeteer.launch({
+    this.browser = await puppeteer.launch({
       headless: false,
       userDataDir: dataDir,
       args: [
@@ -20,7 +23,7 @@ export default class VideoPlayer {
     });
 
     try {
-      const [page] = await browser.pages();
+      const [page] = await this.browser.pages();
       page.setDefaultNavigationTimeout(0);
       await page.goto(url);
       await page.waitForSelector('.ytp-fullscreen-button.ytp-button');
@@ -32,9 +35,11 @@ export default class VideoPlayer {
       //await page.waitForFunction(
       // "document.querySelector('.ytp-time-current').innerHTML === document.querySelector('.ytp-time-duration').innerHTML"
       //);
-      //await browser.close();
     } catch (err) {
       console.error(err);
     }
+  }
+  async closePlayer() {
+    await this.browser.close();
   }
 }

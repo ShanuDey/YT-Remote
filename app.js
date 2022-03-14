@@ -18,12 +18,12 @@ app.post('/start_video', urlencodedParser, function (req, res) {
   const video_url = req.body.video_url;
   // console.log(video_url);
   videoPlayer.playVideo(video_url);
-  res.redirect('/');
 });
 
 app.get('/close', function (req, res) {
   console.log('close');
-  res.send('close');
+  videoPlayer.closePlayer();
+  res.redirect('/');
 });
 
 const PORT = process.env.PORT || 80;
