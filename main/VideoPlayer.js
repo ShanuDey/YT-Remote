@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 
-class VideoPlayer {
-  playVideo(url) {
+export default class VideoPlayer {
+  async playVideo(url) {
     const browser = await puppeteer.launch({
       headless: false,
       defaultViewport: null,
