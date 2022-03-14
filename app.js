@@ -3,6 +3,10 @@ import puppeteer from 'puppeteer';
 const browser = await puppeteer.launch({
   headless: false,
   defaultViewport: null,
+  ignoreDefaultArgs: [
+    '--enable-automation',
+    '--enable-blink-features=IdleDetection',
+  ],
 });
 
 try {
