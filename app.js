@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import VideoPlayer from './main/VideoPlayer.js';
+import 'dotenv/config';
 
 const app = express();
 const videoPlayer = new VideoPlayer();
