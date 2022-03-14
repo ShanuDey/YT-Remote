@@ -1,30 +1,28 @@
-import puppeteer from 'puppeteer';
+import express from 'express';
+import bodyParser from 'body-parser';
+const app = express();
 
-const browser = await puppeteer.launch({
-  headless: false,
-  defaultViewport: null,
-  ignoreDefaultArgs: [
-    '--enable-automation',
-    '--enable-blink-features=IdleDetection',
-  ],
+// Create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+app.use(express.static('public'));
+app.get('/index.html', function (req, res) {
+  res.sendFile(__dirname + '/' + 'index.html');
 });
 
-try {
-  const [page] = await browser.pages();
+app.post('/start_video', urlencodedParser, function (req, res) {
+  console.log(req.body);
+  // Prepare output in JSON format
+  let response = {
+    video_url: req.body.video_url,
+  };
+  console.log(response);
+  res.end(JSON.stringify(response));
+});
 
-  await page.goto('https://www.youtube.com/watch?v=dn69J4ourP8');
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req, res) => {
+  res.send('hello world');
+});
 
-  await page.waitForSelector('.ytp-fullscreen-button.ytp-button');
-
-  await page.evaluate(() => {
-    document.querySelector('.ytp-fullscreen-button.ytp-button').click();
-  });
-
-  // close video player after video ends
-  await page.waitForFunction(
-    "document.querySelector('.ytp-time-current').innerHTML === document.querySelector('.ytp-time-duration').innerHTML"
-  );
-  await browser.close();
-} catch (err) {
-  console.error(err);
-}
+app.listen(4444);
