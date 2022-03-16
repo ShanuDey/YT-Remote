@@ -1,5 +1,9 @@
 # Startup systemd service installation
 
+- set permission for startup script
+
+`sudo chmod +x start.sh`
+
 - Copy ytremote service file to the systemd location
 
 `sudo cp ytremote.service /lib/systemd/system/ytremote.service`
