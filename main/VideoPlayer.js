@@ -1,5 +1,4 @@
 import puppeteer from 'puppeteer';
-import path from 'path';
 
 export default class VideoPlayer {
   constructor() {
@@ -8,15 +7,8 @@ export default class VideoPlayer {
   }
 
   async openPlayer() {
-    const dataDir = path.resolve('dataDir');
-    const extensionPath = path.resolve('extension', 'uBlock');
     this.browser = await puppeteer.launch({
       headless: false,
-      userDataDir: dataDir,
-      args: [
-        `--disable-extensions-except=${extensionPath}`,
-        `--load-extension=${extensionPath}`,
-      ],
       defaultViewport: null,
       ignoreDefaultArgs: [
         '--enable-automation',
