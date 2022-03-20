@@ -2,9 +2,11 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import VideoPlayer from './main/VideoPlayer.js';
 import 'dotenv/config';
+import SystemCommands from './main/SystemCommands.js';
 
 const app = express();
 const videoPlayer = new VideoPlayer();
+const systemCommands = new SystemCommands();
 
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -22,6 +24,11 @@ app.post('/start_video', urlencodedParser, async (req, res) => {
 
 app.get('/close_video', async (req, res) => {
   await videoPlayer.closeVideo();
+  res.redirect('/');
+});
+
+app.get('/shutdown', async (req, res) => {
+  systemCommands.executeRebootCommand();
   res.redirect('/');
 });
 
