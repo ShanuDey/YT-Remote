@@ -1,3 +1,11 @@
+window.onload = () => {
+  'use strict';
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./serviceWorker.js');
+  }
+};
+
 function handleCloseButton(event) {
   event.preventDefault();
   if (confirm('Do you want to close?')) {
