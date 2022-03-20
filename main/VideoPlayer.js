@@ -1,5 +1,4 @@
 import puppeteer from 'puppeteer';
-import path from 'path';
 
 export default class VideoPlayer {
   constructor() {
@@ -8,10 +7,8 @@ export default class VideoPlayer {
   }
 
   async openPlayer() {
-    const dataDir = path.resolve('dataDir');
     this.browser = await puppeteer.launch({
       headless: false,
-      userDataDir: dataDir,
       defaultViewport: null,
       ignoreDefaultArgs: [
         '--enable-automation',
