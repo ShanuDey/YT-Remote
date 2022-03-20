@@ -1,29 +1,18 @@
-// Require child_process
 import { exec } from 'child_process';
 
 export default class SystemCommands {
+  callback(error, stdout, stderr) {
+    console.error(error);
+    console.log(stdout, stderr);
+  }
+
   // Create shutdown function
-  executeShutdownCommand(callback) {
-    exec('shutdown -h now', function (error, stdout, stderr) {
-      callback(stdout);
-    });
+  executeShutdownCommand() {
+    exec('sudo shutdown -h now', this.callback);
   }
 
   // Create reboot function
-  executeRebootCommand(callback) {
-    exec('reboot', function (error, stdout, stderr) {
-      callback(stdout);
-    });
+  executeRebootCommand() {
+    exec('sudo reboot', this.callback);
   }
-
-  executePwdCommand(callback) {
-    exec('pwd', function (error, stdout, stderr) {
-      callback(stdout);
-    });
-  }
-
-  // // shutdown computer
-  // executeShutdownCommand(function (output) {
-  //   console.log(output);
-  // });
 }
