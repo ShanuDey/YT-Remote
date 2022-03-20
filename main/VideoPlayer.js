@@ -14,6 +14,7 @@ export default class VideoPlayer {
         '--enable-automation',
         '--enable-blink-features=IdleDetection',
       ],
+      args: ['--no-default-browser-check'],
     });
     const [page] = await this.browser.pages();
     this.page = page;
