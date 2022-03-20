@@ -28,6 +28,11 @@ app.get('/close_video', async (req, res) => {
 });
 
 app.get('/shutdown', async (req, res) => {
+  systemCommands.executeShutdownCommand();
+  res.redirect('/');
+});
+
+app.get('/reboot', async (req, res) => {
   systemCommands.executeRebootCommand();
   res.redirect('/');
 });
