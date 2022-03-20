@@ -16,28 +16,73 @@
     <title>YT Remote</title>
   </head>
   <body>
-    <div class="container center">
-      <form action="/start_video" method="POST">
-        <div class="mb-3">
-          <label for="ytVideoUrlInput" class="form-label">Youtube Video</label>
-          <input
-            type="url"
-            class="form-control"
-            id="ytVideoUrlInput"
-            aria-describedby="ytUrlHelp"
-            name="video_url"
-            required
-          />
-          <div id="ytUrlHelp" class="form-text">Paste youtube video url</div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">YT Remote</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                System
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/reboot">Reboot</a></li>
+                <li><a class="dropdown-item" href="/shutdown">Shutdown</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
-        <button type="submit" class="btn btn-success">Start</button>
-        <button class="btn btn-danger" onclick="handleCloseButton(event)">
-          Close
-        </button>
-        <button class="btn btn-danger" onclick="handleShutdownButton(event)">
-          Shutdown
-        </button>
-      </form>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="card border-primary m-3 mt-5 text-center">
+        <h5 class="card-header">Youtube Video Player</h5>
+        <div class="card-body">
+          <form action="/start_video" method="POST">
+            <label for="ytVideoUrlInput" class="form-text"> Video Link </label>
+            <input
+              type="url"
+              class="form-control"
+              id="ytVideoUrlInput"
+              aria-describedby="ytUrlHelp"
+              name="video_url"
+              required
+            />
+            <div id="ytUrlHelp" class="form-text">Paste youtube video url</div>
+            <br />
+            <button type="submit" class="btn btn-outline-success btn-sm">
+              Start
+            </button>
+            <button
+              class="btn btn-outline-danger btn-sm"
+              onclick="handleCloseButton(event)"
+            >
+              Close
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
     <script src="./script.js"></script>
