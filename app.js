@@ -1,10 +1,12 @@
 import express from 'express';
+import cors from 'cors';
 import bodyParser from 'body-parser';
 import VideoPlayer from './main/VideoPlayer.js';
 import 'dotenv/config';
 import SystemCommands from './main/SystemCommands.js';
 
 const app = express();
+app.use(cors());
 const videoPlayer = new VideoPlayer();
 const systemCommands = new SystemCommands();
 
@@ -35,6 +37,11 @@ app.get('/shutdown', async (req, res) => {
 app.get('/reboot', async (req, res) => {
   systemCommands.executeRebootCommand();
   res.redirect('/');
+});
+
+app.get('/share', async (req, res) => {
+  console.log(req.body);
+  res.send(res.body);
 });
 
 const PORT = process.env.PORT || 80;
