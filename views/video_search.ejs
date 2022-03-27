@@ -2,7 +2,7 @@
   <div class="card border-primary m-3 mt-5 text-center">
     <h5 class="card-header">Search Youtube Videos</h5>
     <div class="card-body">
-      <form action="/search" method="POST">
+      <form action="/" method="POST">
         <label for="ytVideoUrlInput" class="form-text"> Search Keyword </label>
         <input
           type="text"
@@ -24,6 +24,16 @@
       </form>
     </div>
   </div>
-  <% if(locals.videos) %> 
-  <%- include('video_list', {videos: locals.videos}); %>
+  <% if(locals.videos) %> <%- include('video_list', {videos: locals.videos}); %>
 </div>
+
+<script>
+  function handleCloseButton(event) {
+    event.preventDefault();
+    if (confirm('Do you want to close?')) {
+      window.location = '/close_video';
+    } else {
+      return;
+    }
+  }
+</script>
