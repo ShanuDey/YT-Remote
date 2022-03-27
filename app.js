@@ -20,7 +20,7 @@ const videoSearch = new VideoSearch();
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-app.get('/', (req, res) => {
+app.get('/play_video_by_url', (req, res) => {
   res.render('videos_url_container', {
     layout: './layout',
   });
@@ -52,13 +52,13 @@ app.get('/share', async (req, res) => {
   res.send(res.body);
 });
 
-app.get('/search', (req, res) => {
+app.get('/', (req, res) => {
   res.render('video_search', {
     layout: './layout',
   });
 });
 
-app.post('/search', urlencodedParser, async (req, res) => {
+app.post('/', urlencodedParser, async (req, res) => {
   const search_keyword = req.body.search_keyword;
   const search_result_videos = await videoSearch.search(search_keyword);
   console.log('number of videos found', search_result_videos.length);
