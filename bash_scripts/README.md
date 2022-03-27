@@ -10,7 +10,7 @@
 
 - set permission
 
-`sudo chmod 644 /lib/systemd/system/sample.service`
+`sudo chmod 644 /lib/systemd/system/ytremote.service`
 
 - reload systemd deamon
 
