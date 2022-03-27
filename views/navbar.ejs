@@ -39,6 +39,17 @@
           </ul>
         </li>
       </ul>
+      <form class="d-flex" action="/start_video" method="POST">
+        <input
+          class="form-control me-2"
+          type="url"
+          placeholder="Youtube video link"
+          aria-label="Search"
+          name="video_url"
+          required
+        />
+        <button class="btn btn-outline-success" type="submit">Play</button>
+      </form>
     </div>
   </div>
 </nav>
