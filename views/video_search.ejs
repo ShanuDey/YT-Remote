@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="card border-primary m-3 mt-5 text-center">
+    <h5 class="card-header">Search Youtube Videos</h5>
+    <div class="card-body">
+      <form action="/search" method="POST">
+        <label for="ytVideoUrlInput" class="form-text"> Search Keyword </label>
+        <input
+          type="text"
+          class="form-control"
+          id="ytVideoUrlInput"
+          name="search_keyword"
+          required
+        />
+        <br />
+        <button type="submit" class="btn btn-outline-success btn-sm">
+          Search
+        </button>
+        <button
+          class="btn btn-outline-danger btn-sm"
+          onclick="handleCloseButton(event)"
+        >
+          Close Video
+        </button>
+      </form>
+    </div>
+  </div>
+  <% if(locals.videos) %> <%- include('video_list', {videos: videos}); %>
+</div>

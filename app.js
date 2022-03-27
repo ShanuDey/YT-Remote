@@ -5,6 +5,7 @@ import VideoPlayer from './main/VideoPlayer.js';
 import 'dotenv/config';
 import SystemCommands from './main/SystemCommands.js';
 import expressLayouts from 'express-ejs-layouts';
+import VideoSearch from './main/VideoSearch.js';
 
 const app = express();
 app.use(cors());
@@ -14,6 +15,7 @@ app.use(express.static('public'));
 
 const videoPlayer = new VideoPlayer();
 const systemCommands = new SystemCommands();
+const videoSearch = new VideoSearch();
 
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -48,6 +50,19 @@ app.get('/reboot', async (req, res) => {
 app.get('/share', async (req, res) => {
   console.log(req.body);
   res.send(res.body);
+});
+
+app.get('/search', (req, res) => {
+  res.render('video_search', {
+    layout: './layout',
+  });
+});
+
+app.post('/search', urlencodedParser, async (req, res) => {
+  const search_keyword = req.body.search_keyword;
+  const search_result_videos = await videoSearch.search(search_keyword);
+  console.log('number of videos found', search_result_videos.length);
+  res.render('video_search', { videos: search_result_videos });
 });
 
 const PORT = process.env.PORT || 80;

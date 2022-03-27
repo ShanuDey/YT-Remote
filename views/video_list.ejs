@@ -1,0 +1,13 @@
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <% if(locals.videos) { videos.forEach(function(video){ %>
+  <div class="col">
+    <div class="card">
+      <img src="<%= video.thumbnail %>" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title"><%= video.title.slice(0, 50) %></h5>
+        <p class="card-text"><%= video.description.slice(0, 100) %></p>
+      </div>
+    </div>
+  </div>
+  <% })} %>
+</div>
