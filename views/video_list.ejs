@@ -6,6 +6,17 @@
       <div class="card-body">
         <h5 class="card-title"><%= video.title.slice(0, 50) %></h5>
         <p class="card-text"><%= video.description.slice(0, 100) %></p>
+        <div class="text-end">
+          <form action="/start_video" method="POST">
+            <button
+              class="btn btn-outline-primary"
+              name="video_url"
+              value="<%= video.url %>"
+            >
+              Play
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
