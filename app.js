@@ -4,18 +4,21 @@ import bodyParser from 'body-parser';
 import VideoPlayer from './main/VideoPlayer.js';
 import 'dotenv/config';
 import SystemCommands from './main/SystemCommands.js';
+import expressLayouts from 'express-ejs-layouts';
 
 const app = express();
 app.use(cors());
+app.set('view engine', 'ejs');
+app.use(expressLayouts);
+
 const videoPlayer = new VideoPlayer();
 const systemCommands = new SystemCommands();
 
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-app.use(express.static('public'));
-app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/' + 'index.html');
+app.get('/', (req, res) => {
+  res.render('videos_url_container', { title: 'navbar', layout: './layout' });
 });
 
 app.post('/start_video', urlencodedParser, async (req, res) => {
