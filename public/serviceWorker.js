@@ -1,5 +1,5 @@
 var cacheName = 'yt-remote';
-var filesToCache = ['/', '/index.html', '/style.css', '/script.js'];
+var filesToCache = ['/'];
 
 /* Start the service worker and cache all of the app's content */
 self.addEventListener('install', function (e) {

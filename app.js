@@ -10,6 +10,7 @@ const app = express();
 app.use(cors());
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
+app.use(express.static('public'));
 
 const videoPlayer = new VideoPlayer();
 const systemCommands = new SystemCommands();
@@ -18,7 +19,9 @@ const systemCommands = new SystemCommands();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.get('/', (req, res) => {
-  res.render('videos_url_container', { title: 'navbar', layout: './layout' });
+  res.render('videos_url_container', {
+    layout: './layout',
+  });
 });
 
 app.post('/start_video', urlencodedParser, async (req, res) => {
