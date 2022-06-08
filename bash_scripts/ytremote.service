@@ -7,7 +7,7 @@ Type=simple
 Restart=always
 RestartSec=1
 ExecStart=/home/pi/Documents/YT-Remote/bash_scripts/start.sh
-User=root
+User=pi
 
 [Install]
 WantedBy=multi-user.target
