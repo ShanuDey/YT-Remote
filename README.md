@@ -19,3 +19,7 @@ npm start
 ## [Optional] Set as startup program in linux or raspbery-pi
 
 [Steps](/bash_scripts/README.md)
+
+## Troubleshooting:
+
+[Click Here](/TROUBLESHOOTING.md)
